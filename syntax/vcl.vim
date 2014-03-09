@@ -2,8 +2,9 @@
 " Filename:     vcl.vim
 " Language:     Varnish configuation Language, http://www.varnish-cache.org/wiki/VCL
 " Maintainer:   Elan Ruusamäe <glen@delfi.ee>
-" Version Info: $Revision: 1.7 $
-" Last Change:  $Date: 2010/04/06 08:24:28 $ UTC
+" URL:          http://git.pld-linux.org/packages/vim-syntax-vcl/
+" URL:          https://github.com/pld-linux/vim-syntax-vcl/
+" Revision:     1.8
 
 " For version 5.x: Clear all syntax items
 " For version 6.x: Quit when a syntax file was already loaded
@@ -31,7 +32,7 @@ endif
 "syn match  vclFunctionName "\h[[:alnum:]_:]*" contained
 "syn match  vclFunctionName "\h\w*[^:]" contained
 "
-syn keyword vclOperator     set call return error esi synthetic include remove unset
+syn keyword vclOperator     set call return error esi synthetic include remove unset hash_data
 " return modes
 syn keyword vclModes        deliver pipe pass hash lookup discard fetch restart
 
@@ -53,19 +54,21 @@ syn match  vclNumber   display contained "\d\+"
 syn match  vclNumberTime   display contained "\d\+[dhsm]"
 
 " client
-syn match  vclOption   /client\.ip/
+syn match  vclOption   /client\.\(ip\|identity\)/
 " server
 syn match  vclOption   /server\.\(ip\|port\)/
 " req
 syn match  vclOption   /req\.\(hash\|request\|url\|proto\|backend\.healthy\|backend\|grace\|xid\|restarts\)/
-" bereq.
+" bereq
 syn match  vclOption   /bereq\.\(request\|url\|proto\|connect_timeout\|first_byte_timeout\|between_bytes_timeout\)/
 " obj
 syn match  vclOption   /obj\.\(proto\|status\|response\|cacheable\|ttl\|lastuse\|hits\|hash\|grace\|prefetch\)/
+" beresp
+syn match  vclOption   /beresp\.\(proto\|status\|response\|cacheable\|ttl\|lastuse\|hits\|hash\|grace\|prefetch\|saintmode\)/
 " resp
 syn match  vclOption   /resp\.\(proto\|status\|response\)/
 " common: http.HEADERNAME
-syn match  vclOption   /\(req\|bereq\|resp\|obj\)\.http\.[A-Za-z][-_A-Za-z0-9]*/
+syn match  vclOption   /\(req\|bereq\|resp\|beresp\|obj\)\.http\.[A-Za-z][-_A-Za-z0-9]*/
 
 " Highlight the C block
 syn include @vclC syntax/c.vim
